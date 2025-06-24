@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Pengumuman MPK 2025</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #fce4ec);
+      text-align: center;
+      padding-top: 100px;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    input, button {
+      padding: 12px;
+      font-size: 16px;
+      margin: 10px;
+      width: 280px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #00796b;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004d40;
+    }
+    #loading {
+      display: none;
+      font-size: 18px;
+      color: #555;
+      margin-top: 20px;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>😏 Cek Kejutanmu dari MPK</h1>
+  <p>Masukkan Nomor Pendaftaran untuk mengetahui hasil seleksi</p>
+
+  <input type="text" id="nomor" placeholder="Contoh: MPK202501">
+  <br>
+  <button onclick="cekHasil()">CEK SEKARANG</button>
+
+  <div id="loading">🔍 Mengecek data kamu...</div>
+  <div id="result"></div>
+
+  <script>
+    const data = [
+      { nomor: "MPK202501", nama: "Dewi Isna", status: "Diterima" },
+      { nomor: "MPK202502", nama: "Dhita", status: "Tidak Lolos" },
+      { nomor: "MPK202503", nama: "Alifan", status: "Diterima" },
+      { nomor: "MPK202504", nama: "Ica", status: "Tidak Lolos" },
+      { nomor: "MPK202505", nama: "Gabriel", status: "Tidak Lolos" }
+    ];
+
+    function cekHasil() {
+      const inputNomor = document.getElementById("nomor").value.trim().toUpperCase();
+      const loading = document.getElementById("loading");
+      const result = document.getElementById("result");
+
+      result.innerHTML = "";
+      loading.style.display = "block";
+
+      setTimeout(() => {
+        loading.style.display = "none";
+        const peserta = data.find(p => p.nomor === inputNomor);
+
+        if (peserta) {
+          if (peserta.status.toLowerCase() === "diterima") {
+            result.innerHTML = `🎉 Selamat, ${peserta.nama}! Kamu <span style="color:green">DITERIMA</span> sebagai anggota MPK!`;
+          } else {
+            result.innerHTML = `😥 Mohon maaf, ${peserta.nama}. Kamu <span style="color:red">TIDAK LOLOS</span> kali ini. Semangat terus ya!`;
+          }
+        } else {
+          result.innerHTML = "❌ Nomor pendaftaran tidak ditemukan. Coba dicek lagi, ya.";
+        }
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
